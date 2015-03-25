@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package hotelmanager;
+import java.text.SimpleDateFormat;
 import java.util.Date; 
 
 /**
@@ -20,6 +21,18 @@ public class Reserve implements java.io.Serializable{
     public Date getStart()
     {
         return Start;
+    }
+    public String getUser()
+    {
+        return GUID;
+    }
+     public void setReserveID(int id)
+    {
+        ReserveID  = "" + id; 
+    }
+     public String getReserveID()
+    {
+        return ReserveID;
     }
     public Date getEnd()
     {
@@ -48,29 +61,24 @@ public class Reserve implements java.io.Serializable{
         CheckedIn = false;
         ReserveID = GUID + room + Start + End; 
     }
-    public String checkIn(UserBase current)
+    public String checkIn()
     {
         String result = "Check in did not work";
-        if(current.getType().equals("Admin"))
-        {
-            if(!CheckedIn)
+        if(!CheckedIn)
             {
                 CheckedIn = true; 
                 result = "Checked in " + GUID + " into room " + Room;
             }
             else 
                 result += ": Room is already occupied.";
-        }
-        else 
-                result += ": You do not have permisson for this action.";
+        
+        
         return result;
     }
-    public String checkOut(UserBase current)
+    public String checkOut()
     {
         String result = "Check out did not work";
-        if(current.getType().equals("Admin"))
-        {
-            if(CheckedIn)
+        if(CheckedIn)
             {
                 if(Paid)
                 {
@@ -83,26 +91,22 @@ public class Reserve implements java.io.Serializable{
             }
             else 
                 result += ": Room is not occupied.";
-        }
-        else 
-                result += ": You do not have permisson for this action.";
+        
+       
         return result;
     }
-    public String payForRoom(UserBase current)
+    public String payForRoom()
     {
         String result = "Payment did not work";
-        if(current.getType().equals("Admin"))
-        {
-            if(!Paid)
+       if(!Paid)
             {
                 Paid =true;
                 result = "Payment complete";
             }
             else 
                 result += ": Room is already paid for.";
-        }
-        else 
-                result += ": You do not have permisson for this action.";
+        
+       
         return result;
     }
     public int getLengthOfStay()
@@ -111,22 +115,35 @@ public class Reserve implements java.io.Serializable{
     }
     public String toString()
     {
-        return "(" + "Room Number: " + Room + " Reserved by: " + GUID + " Start Date: " + Start + " End Date: " + End + " ) ";
+        SimpleDateFormat dateParse = new SimpleDateFormat("dd-MM-yyyy");
+        return "\n\t\t(" + "Room Number: " + Room + " Reserved by: " + GUID + " Reservation ID: " + ReserveID + " Start Date: " + dateParse.format(Start) + " End Date: " + dateParse.format(End) + " Checked in: " + CheckedIn + " Paid: " + Paid + " ) ";
     }
     public boolean isFree(Reserve existing)
     {
-        
+        // does some logice to figure our of two reservations are compatable.  
         boolean isAfter = (Start.after(existing.getEnd()));
         boolean isBefore = (End.before(existing.getStart()));
-        boolean notStartBetween = !(Start.after(existing.getStart()) && Start.before(existing.getEnd()));
-        boolean notEndBetween = !(End.after(existing.getStart()) && End.before(existing.getEnd()));
-        //System.out.println(isAfter || isBefore || notEndBetween || notStartBetween);
-        if(isAfter || isBefore || notEndBetween || notStartBetween)
+        boolean notStartBetween = Start.before(existing.getStart());
+        boolean notEndBetween = End.after(existing.getEnd());
+        boolean startBeforeEndAfter = Start.before(existing.getStart()) && End.after(existing.getEnd());
+        /*
+        System.out.println("Start=" + Start);
+        System.out.println("End=" + End);
+        System.out.println("Existing Start=" + existing.getStart());
+        System.out.println("Exisitng End=" + existing.getEnd());
+        System.out.println("!startBeforeEndAfter=" + !startBeforeEndAfter);
+        System.out.println("isAfter=" + isAfter);
+        System.out.println("isBefore=" + isBefore );
+        System.out.println("notEndBetween=" + notEndBetween);
+        System.out.println("notStartBetween=" + notStartBetween);
+        */
+        
+        if((isAfter || isBefore || notEndBetween || notStartBetween) && !startBeforeEndAfter)
             return true;
         else
             return false;
     }
-    public boolean isVaildReservation(Date s, Date e)
+    public boolean isVaildReservation(Date s, Date e) //makes sure the reservation has s before e
     {
         if(s.before(e) || s.equals(e))
             return true;
