@@ -152,15 +152,19 @@ public class HotelManager {
                         System.out.println("What is your end date?");
                         end = kb.nextLine();
                         Date e = dateParse.parse(end);
-                        System.out.println("What is your the Room requested?");
-                        roomnumber = Integer.parseInt(kb.nextLine());
-                        System.out.println("Would you like to pay now?");
-                        if(kb.nextLine().equals("y"))
-                            paid = true;
-                        else
-                            paid = false;
-                            
-                        System.out.println(hotel.makeReservation(s,e,roomnumber,paid));
+                        if(Reserve.isVaildReservation(s,e))
+                        {
+                            System.out.println("What is your the Room requested?");
+                            roomnumber = Integer.parseInt(kb.nextLine());
+                            System.out.println("Would you like to pay now?");
+                            if(kb.nextLine().equals("y"))
+                                paid = true;
+                            else
+                                paid = false;
+                            outputMessage = (hotel.makeReservation(s,e,roomnumber,paid));
+                        }
+                        else 
+                            outputMessage = "Error: Your reservation Ends before it starts. ";
 
                     } catch (ParseException e) {
                        System.out.println(e.getMessage());

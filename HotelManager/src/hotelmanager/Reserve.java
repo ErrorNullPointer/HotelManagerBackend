@@ -143,7 +143,7 @@ public class Reserve implements java.io.Serializable{
         else
             return false;
     }
-    public boolean isVaildReservation(Date s, Date e) //makes sure the reservation has s before e
+    public static boolean isVaildReservation(Date s, Date e) //makes sure the reservation has s before e
     {
         if(s.before(e) || s.equals(e))
             return true;
