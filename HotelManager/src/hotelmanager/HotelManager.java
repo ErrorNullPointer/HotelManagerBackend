@@ -105,10 +105,10 @@ public class HotelManager {
                         searchValue = Integer.parseInt(kb.nextLine());
                         outputMessage = "Searching for a room with: " + Room.describeARoom(searchValue);
                         System.out.println(outputMessage);
-                        System.out.println("What is your requested start date?");
+                        System.out.println("What is your requested start date?(Format: dd-MM-yyyy)");
                         start = kb.nextLine();
                         Date s = dateParse.parse(start);
-                        System.out.println("What is your requested end date?");
+                        System.out.println("What is your requested end date?(Format: dd-MM-yyyy)");
                         end = kb.nextLine();
                         Date e = dateParse.parse(end);
                         outputMessage = hotel.searchAvailableRooms(searchValue, Reserve.makeReserve(s, e, null , -1, false)).toString();
@@ -146,10 +146,10 @@ public class HotelManager {
                     break;
                 case "9": // make a reservation
                     try {
-                        System.out.println("What is your start date?");
+                        System.out.println("What is your start date?(Format: dd-MM-yyyy)");
                         start = kb.nextLine();
                         Date s = dateParse.parse(start);
-                        System.out.println("What is your end date?");
+                        System.out.println("What is your end date?(Format: dd-MM-yyyy)");
                         end = kb.nextLine();
                         Date e = dateParse.parse(end);
                         if(Reserve.isVaildReservation(s,e))
