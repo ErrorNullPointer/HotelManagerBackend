@@ -17,6 +17,14 @@ public class AdminUser extends UserBase {
         setPassword(password); 
         setType("Admin");
     }
+    /**
+    * Generate a new administrator user.
+    * 
+    * @param  name Name of the user.
+    * @param  guid Username of the user
+    * @param  password Administrator password.
+    * @return A new instance of an admin user
+    */
     public static AdminUser makeUser(String name, String guid, String password)
     {
         AdminUser admin = new AdminUser(name,guid,password);

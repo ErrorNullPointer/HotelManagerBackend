@@ -18,13 +18,21 @@ import java.util.Date;
  * @author Luc
  */
 public class Hotel implements java.io.Serializable{// this allows us to save all our data
-    ArrayList<Room> rooms = new ArrayList<Room>();//hols are the rooms
+    ArrayList<Room> rooms = new ArrayList<Room>();//holds all the rooms
     ArrayList<UserBase> users = new ArrayList<UserBase>();//holds all users 
     private UserBase current = null; // the user currently logged in to the system
+    /**
+     * Default constructor.
+     */
     public Hotel()
     {
         
     }
+    /**
+     * Add a room to this hotel.
+     * @param temp The Room object to add.
+     * @return Message indicating if the Room was successfully added.
+     */
     public String AddRoom(Room temp)
     {
         String result = "You do not have rights for this";
@@ -42,6 +50,12 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         
         return result;
     }
+    /**
+     * Set the price of a room in this hotel.
+     * @param room Room number of the room whose price is tho be set.
+     * @param price New price of the Room.
+     * @return Message indicating if the price was changed successfully.
+     */
     public String setRoomPrice(int room, double price)//finds the rooms then sets the price
     {
         String result = "Unable to locate room requested"; 
@@ -62,6 +76,11 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
             result = "You do not have rights for this";
         return result; 
     }
+    /**
+     * Add a user to the hotel.
+     * @param temp User to add.
+     * @return Message indicating if the user was added successfully.
+     */
     public String AddUser(UserBase temp)//add a user to the system
     {
         if(userExist(temp.getGUID())==-1)//checks if the user alreay exists
@@ -71,10 +90,23 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return "Unable to add user. Username already taken.";
     }
+    /**
+     * Change the password of a user in the hotel.
+     * @param oldPass User input to check against the current password.
+     * @param newPass New password for the user.
+     * @param user User whose password is to be changed.
+     * @return Message indicating if the password was changed.
+     */
     public String changeUserPassword(String oldPass, String newPass, UserBase user)//change the password of the user
     {
         return user.changePassword(oldPass, newPass, current);
     }
+    /**
+     * Log in a user to the hotel system.
+     * @param user User ID to log in.
+     * @param password User input for the password.
+     * @return True if the login was successful, false if it was not.
+     */
     public boolean logIn(String user, String password)// goes user to user chacking for correct match, if match not found return false
     {
         boolean result = false;
@@ -90,7 +122,11 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return result;
     }
-     public boolean logOff()
+    /**
+     * Log the user out of the system.
+     * @return If the user was successfully logged in.
+     */
+    public boolean logOff()
     {
         boolean result = false;
         current = null; 
@@ -98,6 +134,10 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
             result = true;
         return result;
     }
+    /**
+     * Generate a string representation of this hotel object.
+     * @return A string representation of this hotel object listing all the users and rooms.
+     */
     public String toString()
     {
         String allData = "";
@@ -132,6 +172,11 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return location;
     }
+    /**
+     * Remove a user from this system.
+     * @param guid User ID to delete.
+     * @return Message indicating if the user was deleted successfully.
+     */
     public String deleteUser(String guid)// romves the user
     {
         String result = "You do not have permssion to do this";
@@ -152,6 +197,11 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         else result = "You have not logged in yet";
         return result;
     }
+    /**
+     * Remove a user from the system.
+     * @param number Room number to delete.
+     * @return A message indicating if the room was removed.
+     */
     public String deleteRoom(String number)//delete a room
     {
         String result = "You do not have permssion to do this";
@@ -172,12 +222,21 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         else result = "You have not logged in yet";
         return result;
     }
+    /**
+     * Return a string representation of the current user.
+     * @return A string representation of the current user.
+     */
     public String currentUser()// displays info about who is logged in
     {
         if(current!=null)
             return current.toString();
         else return "You have not logged in";
     }
+    /**
+     * Search the rooms for an avaliable room with the specified features.
+     * @param search List of features requested.
+     * @return A list of rooms that match the requested features.
+     */
     public ArrayList<Room> searchRooms(int search)
     {
         ArrayList<Room> matches = new ArrayList<Room>();
@@ -190,6 +249,12 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return matches;
     }
+    /**
+     * Look for a room that has the same features and is open in a specified time frame.
+     * @param search List of features requested.
+     * @param request Reservation that holds the requested time frame.
+     * @return List of rooms that match the requested information.
+     */
     public ArrayList<Room> searchAvailableRooms(int search, Reserve request)//look for a room that has the same features and is open when you want it
     {
         ArrayList<Room> matches = new ArrayList<Room>();
@@ -206,6 +271,10 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return matches;
     }
+    /**
+     * Write the hotel data to a serialized file.
+     * @return Message indicating whether writing the data was successful.
+     */
     public String saveState()//save the stae of the system
     {
         String result = "";
@@ -221,6 +290,10 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return result;
     }
+    /**
+     * Create a Hotel from a serialized file.
+     * @return A Hotel object generated from a serialized file.
+     */
     public static Hotel loadState()//load the state
     {
         Hotel savedHotel = null; 
@@ -237,6 +310,11 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return savedHotel;
     }
+    /**
+     * Find all the reservations for a given user.
+     * @param guid User whose reservations are needed.
+     * @return All the reservations associated with the provided user ID.
+     */
     public ArrayList<Reserve> findAllUserReservations(String guid)//return a list of all the reservations for a given user
     {
         ArrayList<Reserve> matches = new ArrayList<Reserve>();
@@ -246,6 +324,10 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         }
         return matches;
     }
+    /**
+     * Get all the reservations for the logged=in user.
+     * @return All the reservations associated with the logged in user.
+     */
     public ArrayList<Reserve> reservationsForCurrentUser()//returns all the reservations fot the user logged in
     {
         if(current != null)
@@ -253,6 +335,11 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         else return null; 
     }
     //public String deleteUserReservation()
+    /**
+     * Delete a specified reservation.
+     * @param reservatinId ID of the reservation to delete.
+     * @return Message indicating if the reservation was deleted.
+     */
     public String deleteReservation(String reservatinId)//delete a reservation
     {
         String result = "Item Not found";
@@ -268,6 +355,12 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
+    /**
+     * Delete reservation as an administrator.
+     * @param guid ID of the user who holds the reservation to delete.
+     * @param reservatinId ID of the reservation to delete.
+     * @return Message indicating if the reservation was deleted.
+     */
     public String adminDeleteReservation(String guid, String reservatinId)//allos you to delete a reservetion that is not attached to your guid
     {
         String result = "Item Not found";
@@ -283,6 +376,12 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
+    /**
+     * Check a user in to a reservation.
+     * @param guid User to check in.
+     * @param reservatinId Reservation ID to check in to.
+     * @return Message indicating if the check in was successful.
+     */
     public String checkInReservation(String guid, String reservatinId)//check a user in
     {
         String result = "Item Not found";
@@ -303,6 +402,12 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
+    /**
+     * Attempt to pay for a reservation.
+     * @param guid ID of the user being paid for.
+     * @param reservatinId ID of the reservation being payed for.
+     * @return String indicating if the payment attempt was successful.
+     */
     public String payReservation(String guid, String reservatinId)//pay for a reservation
     {
         String result = "Item Not found";
@@ -320,6 +425,12 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
+    /**
+     * Check a user out of a reservation
+     * @param guid ID of the user to check out.
+     * @param reservationId ID of the reservation to end.
+     * @return String indicating if the checkout attempt was successful.
+     */
     public String checkOutReservation(String guid, String reservationId)//check out or a reservation
     {
         String result = "Item Not found";
@@ -342,6 +453,14 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
+    /**
+     * Make a reservation with the specified information.
+     * @param s Starting date of the reservation.
+     * @param e Ending date of the reservation.
+     * @param room Room number of the reserved room.
+     * @param paid If the reservation was paid for.
+     * @return String indicating if the reservation was made.
+     */
     public String makeReservation(Date s, Date e, int room, boolean paid)//make a reservation
     {
         String result = "Unable to make reservation";
