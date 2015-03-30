@@ -121,7 +121,7 @@ public class HotelManager {
                     break;
                 case "7": // add a room
                     try {
-                        System.out.println("What is your the Room number?");
+                        System.out.println("What is the Room number?");
                         roomnumber = Integer.parseInt(kb.nextLine());
                         System.out.println("What are the room features?");
                         features = Integer.parseInt(kb.nextLine());
