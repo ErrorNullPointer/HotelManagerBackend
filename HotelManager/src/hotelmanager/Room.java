@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Luc
  */
 public class Room implements java.io.Serializable{
-    int roomNumber; 
+    String roomNumber; 
     private ArrayList<Reserve> reservations = new ArrayList<Reserve>();
     private int reservationCount; 
     private int Features; 
@@ -25,7 +25,13 @@ public class Room implements java.io.Serializable{
     private static int twobeds = 16; 
     private static int nonsmokeing = 32; 
     
-    private Room(int number, int features, double price)
+    /**
+     * 
+     * @param number
+     * @param features
+     * @param price 
+     */
+    public Room(String number, int features, double price)
     {
         Features = features; 
         roomNumber = number;
@@ -34,15 +40,33 @@ public class Room implements java.io.Serializable{
         //paid = true;
         //occupied = false; 
     }
-    public static Room makeRoom(int number, int features, double price)
+    
+    /**
+     * 
+     * @param number
+     * @param features
+     * @param price
+     * @return 
+     */
+    public static Room makeRoom(String number, int features, double price)
     {
             Room temp = new Room(number, features, price);
             return temp;
     }
+    
+    /**
+     * 
+     * @param price 
+     */
     public void setPrice(double price)
     {
             Price = price;
     }
+    
+    /**
+     * 
+     * @return 
+     */
     private String describeRoom()//Returns a string description of the current room
     {
         
@@ -68,6 +92,12 @@ public class Room implements java.io.Serializable{
             des += "Has two beds, ";
         return des; 
     }
+    
+    /**
+     * 
+     * @param temp
+     * @return 
+     */
     public static String describeARoom(int temp)//Returns a string description, however you can pass in any number
     {
         
@@ -94,33 +124,69 @@ public class Room implements java.io.Serializable{
         
         return des; 
     }
+    /**
+     * 
+     * @param search
+     * @return 
+     */
     public boolean isMatch(int search)
     {
         boolean match = ((search & Features) == search);
         return match;
             
     }
-    public String getRoom()
-    {
-        return "" + roomNumber; 
-    }
-    public int getRoomInt()
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getRoomNum()
     {
         return roomNumber; 
     }
+    /**
+     * 
+     * @return 
+     */
+    //public Integer getRoom()
+    //{
+      //  return Integer.getInteger(roomNumber); 
+    //}
+    
+    /**
+     * 
+     * @return 
+     */
     public double getPrice()
     {
         return Price; 
     }
+    
+    /**
+     * 
+     * @param reservation
+     * @return 
+     */
     public double getPriceForDuration(Reserve reservation)//returns how much a stay wll cost
     {
         return Math.round(Price * reservation.getLengthOfStay()*100)/100;
     }
+    
+    /**
+     * 
+     * @return 
+     */
     public String toString()
     {
         String allData = "\n\tRoomNumber = " + roomNumber +" Price: " + Price + " Reservations: " + reservations.toString() + " \n\t\tRoom Details: " + describeRoom() ;
         return allData; 
     }
+    
+    /**
+     * 
+     * @param temp
+     * @return 
+     */
     public boolean checkReservations(Reserve temp)//check if reservation willl work with an eisting reservation
     {
         if(temp != null)
@@ -134,6 +200,12 @@ public class Room implements java.io.Serializable{
             
         return true;
     }
+    
+    /**
+     * 
+     * @param temp
+     * @return 
+     */
     public String addReservation(Reserve temp)//add a reservation to the list
     {
         String result = "Reservation was not added: Room is unavailable at that time.";
@@ -146,6 +218,12 @@ public class Room implements java.io.Serializable{
         }
         return result; 
     }
+    
+    /**
+     * 
+     * @param userID
+     * @return 
+     */
     public ArrayList<Reserve> getReservationsWithUser(String userID)//get all the reservations a certain user has
     {
         ArrayList<Reserve> matches = new ArrayList<Reserve>();
@@ -159,6 +237,13 @@ public class Room implements java.io.Serializable{
         return matches; 
         
     }
+    
+    /**
+     * 
+     * @param userID
+     * @param reservation
+     * @return 
+     */
     public String removeReservationWithUser(String userID, String reservation)//removes the reservation of a verterin user
     {
         String result = "Reservation for that user was not found";
@@ -174,5 +259,13 @@ public class Room implements java.io.Serializable{
         return result;
     }
     
+    public void setRoomNumber(String temp)
+    {
+        this.roomNumber = temp;
+    }
     
+    public void setRoomInfo(int temp)
+    {
+        this.Features = temp;
+    }
 }

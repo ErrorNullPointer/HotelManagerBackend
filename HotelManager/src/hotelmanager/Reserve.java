@@ -14,7 +14,7 @@ import java.util.Date;
 public class Reserve implements java.io.Serializable{
     private Date Start, End;
     private String GUID, ReserveID;
-    private int Room;
+    private String Room;
     private boolean Paid;
     private boolean CheckedIn;
     
@@ -38,12 +38,12 @@ public class Reserve implements java.io.Serializable{
     {
         return End;
     }
-    public static Reserve makeReserve(Date s, Date e, String guid, int room, boolean paid)
+    public static Reserve makeReserve(Date s, Date e, String guid, String room, boolean paid)
     {
         Reserve result = new Reserve( s,  e,  guid,  room,  paid);
         return result;
     }
-    public Reserve(Date s, Date e, String guid, int room, boolean paid)
+    public Reserve(Date s, Date e, String guid, String room, boolean paid)
     {
         if(isVaildReservation(s,e))//checks to see if start is before end, if not it switches the dates
         {
