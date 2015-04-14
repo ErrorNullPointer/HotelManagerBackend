@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package Resources;
-
+import java.lang.IndexOutOfBoundsException;
 /**
  *
  * @author PikeMobile
  */
 public interface Iterator {
     public boolean hasNext();
-    public Object next();
+    public Object next() throws IndexOutOfBoundsException;
 }

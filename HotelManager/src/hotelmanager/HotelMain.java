@@ -18,12 +18,19 @@ public class HotelMain {
      */
     public static void main(String[] args) {
         
-        //if(hotel)
-        UserInformation admin = new UserInformation("Hotel", "Admin", "", "Admin", "Admin");
+        //Hotel hotel = Hotel.getInstance();
+        //hotel = Hotel.loadState();
         SQLiteJDBC database = SQLiteJDBC.getInstance();
-        database.insert("USERS", admin);
+            
+        //if(hotel == null)
+        //{
+            UserInformation admin = new UserInformation("Hotel", "Admin", "", "Admin", "Admin");
+            database.insert("USERS", admin);
+        //}
+        
         UserLogin login = UserLogin.getInstance();
         login.setVisible(true);
+        
     }
     
 }

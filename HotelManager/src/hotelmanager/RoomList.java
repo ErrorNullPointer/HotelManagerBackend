@@ -13,8 +13,8 @@ import javax.swing.DefaultListModel;
  *
  * @author PikeMobile
  */
-public class RoomList {
-    private ArrayList<Room> rooms = new ArrayList<Room>();//hols are the rooms
+public class RoomList implements java.io.Serializable{
+    public ArrayList<Room> rooms = new ArrayList<Room>();//hols are the rooms
     public DefaultListModel list = new DefaultListModel();
     
     public RoomList(){

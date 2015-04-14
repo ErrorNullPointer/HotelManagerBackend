@@ -10,6 +10,7 @@ import hotelmanager.Hotel;
 import hotelmanager.UserInformation;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import Resources.ModelAdapter;
 
 /**
  *
@@ -229,6 +230,7 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
 
+        hotel.saveState();
         user.logout();
         UserLogin login = UserLogin.getInstance();
         login.setVisible(true);
@@ -249,7 +251,11 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
 
     private void logoutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutItemActionPerformed
         // TODO add your handling code here:
+        hotel.saveState();
+        UserLogin login = UserLogin.getInstance();
+        login.setVisible(true);
         user.logout();
+        this.dispose();
     }//GEN-LAST:event_logoutItemActionPerformed
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
@@ -278,7 +284,9 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        this.update();
+        int total = 0;
+        jList.setModel(new ModelAdapter(hotel.searchRooms(total)));
+        //this.update();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void update()

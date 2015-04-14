@@ -178,7 +178,7 @@ public class Room implements java.io.Serializable{
      */
     public String toString()
     {
-        String allData = "\n\tRoomNumber = " + roomNumber +" Price: " + Price + " Reservations: " + reservations.toString() + " \n\t\tRoom Details: " + describeRoom() ;
+        String allData = roomNumber ;//+" Price: " + Price +" \n\t\tRoom Details: " + describeRoom() ;
         return allData; 
     }
     
@@ -201,6 +201,10 @@ public class Room implements java.io.Serializable{
         return true;
     }
     
+    public ArrayList<Reserve> allReservations()
+    {
+        return reservations;
+    }
     /**
      * 
      * @param temp

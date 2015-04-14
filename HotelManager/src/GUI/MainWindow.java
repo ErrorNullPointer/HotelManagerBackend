@@ -65,6 +65,7 @@ public class MainWindow extends javax.swing.JFrame {
 //            System.out.println(temp.toString());
 //            i++;
 //        }
+        
         roomModel = hotel.searchAllRooms().list;
         jList.setModel(roomModel);
         
@@ -281,7 +282,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void update()
     {
-        jList.setModel(hotel.searchAllRooms().list);
+        jList.setModel(new ModelAdapter(hotel.searchAllRooms().rooms));
         
     }
     
@@ -338,6 +339,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void logoutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutItemActionPerformed
         // TODO add your handling code here:
+        hotel.saveState();
         user.logout();
     }//GEN-LAST:event_logoutItemActionPerformed
 

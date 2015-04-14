@@ -5,6 +5,7 @@
  */
 package Resources;
 
+import hotelmanager.RoomList;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
@@ -15,6 +16,10 @@ import javax.swing.DefaultListModel;
  */
 public class ModelAdapter extends DefaultListModel{
     
+    /**
+     *
+     * @param list
+     */
     public ModelAdapter(ArrayList<?> list)
     {
         ListIterator it = list.listIterator();
