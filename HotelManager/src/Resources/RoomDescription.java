@@ -9,7 +9,7 @@ package Resources;
  *
  * @author PikeMobile
  */
-public class RoomDescription {
+public class RoomDescription implements java.io.Serializable{
     
     // set values for features, to add one just double the privous number
     public final int smoke = 1;
@@ -47,11 +47,11 @@ public class RoomDescription {
                 */        
         if ((Features & smoke) == smoke)
         {
-            des += "Smokeing, ";
+            des += "Smoking, ";
         }
         else 
         {
-            des += "Non Smokeing, ";
+            des += "Non Smoking, ";
         }
         if ((Features & twobeds) == twobeds)
         {

@@ -20,6 +20,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import Resources.*;
 import hotelmanager.*;
+import java.util.ArrayList;
 import javax.swing.table.TableModel;
 import jdk.nashorn.internal.runtime.JSObjectListAdapter;
 
@@ -35,6 +36,8 @@ public class MainWindow extends javax.swing.JFrame {
     static private UserInformation user = null;
     private Hotel hotel = Hotel.getInstance();
     private DefaultListModel roomModel;
+    private ArrayList roomList = null;
+    private ArrayList reservationList = null;
     //DefaultListModel model = new DefaultListModel();
     
     /**
@@ -65,10 +68,9 @@ public class MainWindow extends javax.swing.JFrame {
 //            System.out.println(temp.toString());
 //            i++;
 //        }
-        
-        roomModel = new ModelAdapter(hotel.searchAllRooms());
-        jList.setModel(roomModel);
-        
+        roomList = hotel.searchAllRooms();
+        reservationList = hotel.getReservations();
+        this.update();
     }
 
     /**
@@ -282,8 +284,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void update()
     {
-        jList.setModel(new ModelAdapter(hotel.searchAllRooms()));
-        
+        jList.setModel(new ModelAdapter(roomList));
+        jList1.setModel(new ModelAdapter(reservationList));
     }
     
     /**

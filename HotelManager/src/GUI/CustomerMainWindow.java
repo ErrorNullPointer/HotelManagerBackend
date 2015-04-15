@@ -6,10 +6,21 @@
 package GUI;
 
 import Resources.ModelAdapter;
+import Resources.RoomDescription;
 import Resources.SQLiteJDBC;
 import hotelmanager.Hotel;
+import hotelmanager.Room;
 import hotelmanager.UserInformation;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -20,9 +31,16 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     private SQLiteJDBC database = SQLiteJDBC.getInstance();
     //private final UserInformation guest = new UserInformation("Guest", "Guest", "", "Guest", "Customer");
     //private UserInformation user = guest;
-    private DefaultListModel model = null;
+    //private DefaultListModel model = null;
     static private UserInformation user = null;
     private Hotel hotel = Hotel.getInstance();
+    private ArrayList<Room> roomList = null;
+    RoomDescription describe = new RoomDescription();
+//    UtilDateModel model = new UtilDateModel();
+//JDatePanelImpl datePanel = new JDatePanelImpl(model);
+//JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+// 
+//    add(datePicker);
     /**
      * Creates new form CustomerMainWindow
      * @param 
@@ -32,8 +50,8 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         database = SQLiteJDBC.getInstance();
         user = aUser;
         firstNameLabel.setText(user.GetFirstName());
-        model = new ModelAdapter(hotel.searchAllRooms());
-        jList1.setModel(model);
+        roomList = hotel.searchAllRooms();
+        this.update();
     }
 
     /**
@@ -49,12 +67,14 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         firstNameLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        reserveButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         smokingCheckBox = new javax.swing.JCheckBox();
         twoBedCheckBox = new javax.swing.JCheckBox();
         queenBedCheckBox = new javax.swing.JCheckBox();
+        StartLine = new javax.swing.JFormattedTextField();
+        EndLine = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
@@ -80,10 +100,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Reserve Room");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        reserveButton.setText("Reserve Room");
+        reserveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                reserveButtonActionPerformed(evt);
             }
         });
 
@@ -104,6 +124,17 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         twoBedCheckBox.setText("Two Beds");
 
         queenBedCheckBox.setText("Queen Bed");
+
+        StartLine.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        StartLine.setText("4/1/2015");
+        StartLine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartLineActionPerformed(evt);
+            }
+        });
+
+        EndLine.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        EndLine.setText("4/2/15");
 
         jMenu1.setText("File");
 
@@ -128,11 +159,14 @@ public class CustomerMainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(reserveButton)
                 .addGap(67, 67, 67))
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(514, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(smokingCheckBox)
                         .addGap(30, 30, 30)
@@ -147,9 +181,11 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                         .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(logoutButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(514, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(StartLine, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EndLine, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(899, 899, 899))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,8 +194,8 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                     .addComponent(logoutButton)
                     .addComponent(jLabel1)
                     .addComponent(firstNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 629, Short.MAX_VALUE)
+                .addComponent(reserveButton)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
@@ -168,9 +204,13 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                     .addComponent(smokingCheckBox)
                     .addComponent(twoBedCheckBox)
                     .addComponent(queenBedCheckBox))
-                .addGap(22, 22, 22)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StartLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EndLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,17 +222,39 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         user.logout();
     }//GEN-LAST:event_logoutMenuActionPerformed
 
+    public void update()
+    {
+        if(roomList.size()>0)
+        {
+            jList1.setModel(new ModelAdapter(roomList));
+        }
+        
+    }
+    
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
         hotel.saveState();
         user.logout();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        int index = jList1.getSelectedIndex();
-        hotel.checkInReservation(user.GetEmailAddress(), null);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void reserveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveButtonActionPerformed
+        try {
+            // TODO add your handling code here:
+            int index = jList1.getSelectedIndex();
+            if(roomList.size() > 0)
+            {
+                Room temp = (Room)roomList.get(index);
+                Date Start, End;
+                DateFormat format = null;
+                Start = format.parse((String)StartLine.getText());
+                End = format.parse((String)EndLine.getText());
+
+                hotel.makeReservation(Start,End,temp.getRoomNum(),false,user.GetEmailAddress()) ;
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(CustomerMainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reserveButtonActionPerformed
 
     private void smokingCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smokingCheckBoxActionPerformed
         // TODO add your handling code here:
@@ -203,10 +265,23 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         int total = 0;
         if(smokingCheckBox.isSelected())
         {
-            total = 0;
+            total += describe.smoke;
         }
-        hotel.searchRooms(total);
+        if(queenBedCheckBox.isSelected())
+        {
+            total += describe.queenBed;
+        }
+        if(twoBedCheckBox.isSelected())
+        {
+            total += describe.twobeds;
+        }
+        roomList = hotel.searchRooms(total);
+        this.update();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void StartLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartLineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StartLineActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,9 +319,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField EndLine;
+    private javax.swing.JFormattedTextField StartLine;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
@@ -256,6 +332,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     private javax.swing.JButton logoutButton;
     private javax.swing.JMenuItem logoutMenu;
     private javax.swing.JCheckBox queenBedCheckBox;
+    private javax.swing.JButton reserveButton;
     private javax.swing.JCheckBox smokingCheckBox;
     private javax.swing.JCheckBox twoBedCheckBox;
     // End of variables declaration//GEN-END:variables

@@ -116,7 +116,7 @@
               <Component id="CheckInButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="CheckOutButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="407" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="nameLabel" min="-2" pref="65" max="-2" attributes="0"/>

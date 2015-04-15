@@ -98,6 +98,10 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return allData; 
     }
     
+    public ArrayList getReservations()
+    {
+     return reserveList.list;   
+    }
     /**
      * 
      * @param number
@@ -393,9 +397,9 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
-    public String makeReservation(Date s, Date e, String room, boolean paid)//make a reservation
+    public boolean makeReservation(Date s, Date e, String room, boolean paid, String ID)//make a reservation
     {
-        String result = "Unable to make reservation";
+        boolean result = false;
         if(current != null)
         {
             for(int x = 0; x < rooms.size(); x++)// check each room until you find the one you are looking for, then add a reservation
@@ -403,16 +407,17 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
                 Room Temp = rooms.getRoom(x);
                 if(Temp.getRoomNum().equals(room))
                 {
-                    Reserve temp = Reserve.makeReserve(s, e, current.getGUID(), room, paid);
-                    result = Temp.addReservation(temp);
+                    Reserve temp = Reserve.makeReserve(s, e, ID, room, paid);
+                    if(Temp.addReservation(temp))
+                    {
+                        result = true;
+                    }
                     break;
                 }
-                else
-                    result = ": unable to find room";
+                //else false
             }
         }
-        else
-            result += ": You have not logged in";
+
         return result;
     }
     

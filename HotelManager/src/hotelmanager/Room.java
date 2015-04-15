@@ -130,7 +130,7 @@ public class Room implements java.io.Serializable{
      */
     public String toString()
     {
-        String allData = roomNumber +" Price: " + Price +" Room Details: " + this.describeRoom() ;
+        String allData = "Room: "+roomNumber +" Price: " + Price +" Room Details: " + this.describeRoom() ;
         return allData; 
     }
     
@@ -162,15 +162,17 @@ public class Room implements java.io.Serializable{
      * @param temp
      * @return 
      */
-    public String addReservation(Reserve temp)//add a reservation to the list
+    public boolean addReservation(Reserve temp)//add a reservation to the list
     {
-        String result = "Reservation was not added: Room is unavailable at that time.";
+        //String result = "Reservation was not added: Room is unavailable at that time.";
+        boolean result = false;
         reservationCount++; 
         if(checkReservations(temp))
         {
             temp.setReserveID(reservationCount);
             reservations.add(temp);
-            result = "Reservation added";
+            //result = "Reservation added";
+            result = true;
         }
         return result; 
     }
