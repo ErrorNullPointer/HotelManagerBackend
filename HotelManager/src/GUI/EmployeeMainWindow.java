@@ -291,7 +291,7 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
 
     private void update()
     {
-        jList.setModel(hotel.searchAllRooms().list);
+        jList.setModel(new ModelAdapter(hotel.searchAllRooms()));
     }
     
     private void createUserMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserMenuActionPerformed

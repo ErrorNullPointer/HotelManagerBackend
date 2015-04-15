@@ -32,7 +32,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         database = SQLiteJDBC.getInstance();
         user = aUser;
         firstNameLabel.setText(user.GetFirstName());
-        model = new ModelAdapter(hotel.searchAllRooms().rooms);
+        model = new ModelAdapter(hotel.searchAllRooms());
         jList1.setModel(model);
     }
 

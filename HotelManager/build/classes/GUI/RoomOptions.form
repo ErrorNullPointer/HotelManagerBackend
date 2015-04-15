@@ -63,7 +63,7 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="bedSizeBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="96" max="32767" attributes="0"/>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                       <Component id="smokingBox" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -132,10 +132,9 @@
     <Component class="javax.swing.JComboBox" name="bedSizeBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Twin"/>
+          <StringArray count="2">
+            <StringItem index="0" value="Double"/>
             <StringItem index="1" value="Queen"/>
-            <StringItem index="2" value="King"/>
           </StringArray>
         </Property>
       </Properties>

@@ -6,7 +6,7 @@
 package hotelmanager;
 
 import java.util.ArrayList;
-
+import Resources.RoomDescription;
 /**
  *
  * @author Luc
@@ -17,13 +17,7 @@ public class Room implements java.io.Serializable{
     private int reservationCount; 
     private int Features; 
     private double Price; 
-    // set values for features, to add one just double the privous number
-    private static int smoke = 1;
-    private static int doubleBed = 2;
-    private static int suite = 4;
-    private static int handicap = 8;
-    private static int twobeds = 16; 
-    private static int nonsmokeing = 32; 
+    RoomDescription describe = null;
     
     /**
      * 
@@ -33,7 +27,8 @@ public class Room implements java.io.Serializable{
      */
     public Room(String number, int features, double price)
     {
-        Features = features; 
+        describe = new RoomDescription(features);
+        Features = describe.getFeatures(); 
         roomNumber = number;
         Price = price;
         reservationCount = 0; 
@@ -67,63 +62,20 @@ public class Room implements java.io.Serializable{
      * 
      * @return 
      */
-    private String describeRoom()//Returns a string description of the current room
+    public String describeRoom()//Returns a string description of the current room
+    {   
+        return describe.describeRoom();
+    }
+
+    /**
+     * Get the int value representation for the room.
+     * @return int
+     */
+    public int getFeatures()
     {
-        
-        String des = "";
-        /*
-        int smoke = 1;
-        int doubleBed = 2;
-        int suite = 4;
-        int handicap = 8;
-        int twobeds = 16; 
-                */        
-        if ((Features & smoke) == smoke)
-            des += "Smokeing, ";
-        else 
-            des += "Non Smokeing, ";
-        if ((Features & doubleBed) == doubleBed)
-            des += "Double Bed, ";
-        if ((Features & suite) == suite)
-            des += "Suite, ";
-        if ((Features & handicap) == handicap)
-            des += "Handicap, ";
-        if ((Features & twobeds) == twobeds)
-            des += "Has two beds, ";
-        return des; 
+        return Features;
     }
     
-    /**
-     * 
-     * @param temp
-     * @return 
-     */
-    public static String describeARoom(int temp)//Returns a string description, however you can pass in any number
-    {
-        
-        String des = "";
-        /*
-        int smoke = 1;
-        int doubleBed = 2;
-        int suite = 4;
-        int handicap = 8;
-        int twobeds = 16; 
-                */        
-        if ((temp & smoke) == smoke)
-            des += "Smokeing, ";
-        if ((temp & doubleBed) == doubleBed)
-            des += "Double Bed, ";
-        if ((temp & suite) == suite)
-            des += "Suite, ";
-        if ((temp & handicap) == handicap)
-            des += "Handicap, ";
-        if ((temp & twobeds) == twobeds)
-            des += "Has two beds, ";
-        if ((temp & nonsmokeing) == nonsmokeing)
-            des += "Non-Smoking, ";
-        
-        return des; 
-    }
     /**
      * 
      * @param search
@@ -178,7 +130,7 @@ public class Room implements java.io.Serializable{
      */
     public String toString()
     {
-        String allData = roomNumber ;//+" Price: " + Price +" \n\t\tRoom Details: " + describeRoom() ;
+        String allData = roomNumber +" Price: " + Price +" Room Details: " + this.describeRoom() ;
         return allData; 
     }
     

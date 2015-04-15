@@ -190,9 +190,9 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
      * 
      * @return 
      */
-    public RoomList searchAllRooms()
+    public ArrayList searchAllRooms()
     {
-        return rooms;
+        return rooms.rooms;
     }
     
     /**

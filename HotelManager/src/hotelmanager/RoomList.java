@@ -33,9 +33,26 @@ public class RoomList implements java.io.Serializable{
         return true;
     }
     
+    /**
+     * 
+     * @param index
+     * @return 
+     */
     public Room getRoom(int index)
     {
         return rooms.get(index);
+    }
+    
+    public Room getRoom(String name)
+    {   int i = 0;
+        for( ; i< rooms.size(); i++)
+        {
+            if(rooms.get(i).getRoomNum().equals(name))
+            {
+                return rooms.get(i);
+            }
+        }
+        return null;
     }
     /**
      * Add unique room to RoomList.

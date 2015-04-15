@@ -5,27 +5,23 @@
  */
 package Resources;
 
-import hotelmanager.RoomList;
 import java.util.ArrayList;
 import java.util.ListIterator;
-import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author PikeMobile
  */
-public class ModelAdapter extends DefaultListModel{
+public class TableModelAdapter extends DefaultTableModel{
     
-    /**
-     *
-     * @param list
-     */
-    public ModelAdapter(ArrayList<?> list)
+    public TableModelAdapter(ArrayList<?> list)
     {
         ListIterator it = list.listIterator();
         while(it.hasNext())
         {
-            this.addElement(it.next());
+            //this.ad
+            //this.addRow(it.next());
         }
     }
 }

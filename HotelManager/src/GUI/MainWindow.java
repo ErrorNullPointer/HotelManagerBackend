@@ -66,7 +66,7 @@ public class MainWindow extends javax.swing.JFrame {
 //            i++;
 //        }
         
-        roomModel = hotel.searchAllRooms().list;
+        roomModel = new ModelAdapter(hotel.searchAllRooms());
         jList.setModel(roomModel);
         
     }
@@ -282,7 +282,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void update()
     {
-        jList.setModel(new ModelAdapter(hotel.searchAllRooms().rooms));
+        jList.setModel(new ModelAdapter(hotel.searchAllRooms()));
         
     }
     

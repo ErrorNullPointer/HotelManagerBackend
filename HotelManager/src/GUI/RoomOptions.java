@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import Resources.RoomDescription;
 import hotelmanager.*;
 import Resources.SQLiteJDBC;
 /**
@@ -12,10 +13,9 @@ import Resources.SQLiteJDBC;
  */
 public class RoomOptions extends javax.swing.JDialog {
 
-    enum BEDS {Twin,Queen, King};
-    enum SMOKE {Smoking, Non_Smoking};
     Room currentRoom = null;
     boolean newRoom = true;
+    RoomDescription describe = new RoomDescription();
     /**
      * Creates new form RoomOptions
      */
@@ -39,6 +39,31 @@ public class RoomOptions extends javax.swing.JDialog {
         currentRoom = room;
         roomNumberField.setText(currentRoom.getRoomNum());
         priceTextField.setText(Double.toString(currentRoom.getPrice()));
+        int features = room.getFeatures();
+        if((features & describe.queenBed) == describe.queenBed)
+        {
+            bedSizeBox.setSelectedIndex(1);
+        }
+        else
+        {
+            bedSizeBox.setSelectedIndex(0);
+        }
+        if((features & describe.smoke) == describe.smoke)
+        {
+            smokingBox.setSelectedIndex(1);
+        }
+        else
+        {
+            smokingBox.setSelectedIndex(1);
+        }
+        if((features & describe.twobeds) == describe.twobeds)
+        {
+            numOfBedsBox.setSelectedIndex(1);
+        }
+        else
+        {
+            numOfBedsBox.setSelectedIndex(1);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,7 +103,7 @@ public class RoomOptions extends javax.swing.JDialog {
             }
         });
 
-        bedSizeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Twin", "Queen", "King" }));
+        bedSizeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Double", "Queen" }));
         bedSizeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bedSizeBoxActionPerformed(evt);
@@ -159,7 +184,7 @@ public class RoomOptions extends javax.swing.JDialog {
                             .addComponent(jLabel5)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bedSizeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                         .addComponent(smokingBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(58, 58, 58))
         );
@@ -220,13 +245,26 @@ public class RoomOptions extends javax.swing.JDialog {
 
     private void AcceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptButtonActionPerformed
         // TODO add your handling code here:
+            int features = 0;
+            if(bedSizeBox.getSelectedIndex() == 1)
+            {
+                features += describe.queenBed;
+            }
+            if(smokingBox.getSelectedIndex() == 1)
+            {
+                features += describe.smoke;
+            }
+            if(numOfBedsBox.getSelectedIndex() == 1)
+            {
+                features += describe.twobeds;
+            }
         if(newRoom)
-        {
-            currentRoom = new Room(roomNumberField.getText(), 1, Double.parseDouble(priceTextField.getText()));
+        { 
+            currentRoom = new Room(roomNumberField.getText(), features, Double.parseDouble(priceTextField.getText()));
             Hotel hotel = Hotel.getInstance();
             if(hotel.AddRoom(currentRoom))
             {
-                
+                System.out.println(currentRoom.describeRoom());
             }
             else
             {
@@ -236,8 +274,9 @@ public class RoomOptions extends javax.swing.JDialog {
         else
         {
             currentRoom.setPrice(Double.parseDouble(priceTextField.getText()));
-            currentRoom.setRoomInfo(1);
+            currentRoom.setRoomInfo(features);
             currentRoom.setRoomNumber(roomNumberField.toString());
+            System.out.println(currentRoom.describeRoom());
         }
         
         this.setVisible(false);
