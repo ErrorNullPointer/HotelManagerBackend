@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/Resources/SQLiteJDBC.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/GUI/RoomOptions.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/GUI/CustomerMainWindow.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/hotelmanager/Hotel.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/GUI/EmployeeMainWindow.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/hotelmanager/ReservationList.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/hotelmanager/UserBase.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/GUI/MainWindow.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/GUI/UserLogin.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/Resources/RoomDescription.java</file>
-            <file>file:/C:/Users/Troy%20Gilmore/Desktop/School/CS%20321/HotelManagerBackend/HotelManager/src/hotelmanager/Room.java</file>
+            <file>file:/C:/Users/Eric/Documents/GitHub/HotelManagerBackend/HotelManager/src/hotelmanager/HotelMain.java</file>
+            <file>file:/C:/Users/Eric/Documents/GitHub/HotelManagerBackend/HotelManager/src/hotelmanager/Room.java</file>
+            <file>file:/C:/Users/Eric/Documents/GitHub/HotelManagerBackend/HotelManager/src/GUI/CustomerMainWindow.java</file>
+            <file>file:/C:/Users/Eric/Documents/GitHub/HotelManagerBackend/HotelManager/src/hotelmanager/Hotel.java</file>
+            <file>file:/C:/Users/Eric/Documents/GitHub/HotelManagerBackend/HotelManager/src/hotelmanager/ReservationList.java</file>
+            <file>file:/C:/Users/Eric/Documents/GitHub/HotelManagerBackend/HotelManager/src/GUI/MainWindow.java</file>
         </group>
     </open-files>
 </project-private>

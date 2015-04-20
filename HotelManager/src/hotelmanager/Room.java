@@ -171,6 +171,7 @@ public class Room implements java.io.Serializable{
         {
             temp.setReserveID(reservationCount);
             reservations.add(temp);
+            
             //result = "Reservation added";
             result = true;
         }

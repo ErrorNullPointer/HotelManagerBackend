@@ -15,7 +15,7 @@ import javax.swing.DefaultListModel;
  */
 public class RoomList implements java.io.Serializable{
     public ArrayList<Room> rooms = new ArrayList<Room>();//hols are the rooms
-    public DefaultListModel list = new DefaultListModel();
+    //public DefaultListModel list = new DefaultListModel();
     
     public RoomList(){
         
@@ -29,7 +29,7 @@ public class RoomList implements java.io.Serializable{
     public boolean remove(int index)
     {
         rooms.remove(index);
-        list.removeElementAt(index);
+        //list.removeElementAt(index);
         return true;
     }
     
@@ -69,7 +69,7 @@ public class RoomList implements java.io.Serializable{
             }
         }
         rooms.add(temp);
-        list.addElement(temp.toString());
+        //list.addElement(temp.toString());
         System.out.println("Added " + temp.toString());
         return true;
     }
@@ -87,12 +87,12 @@ public void  insertRoom(Room temp)
             {
                rooms.remove(i);
                rooms.add(i, temp);
-               list.add(i, temp.toString());
+               //list.add(i, temp.toString());
                return;
             }
         }
     rooms.add(temp);
-    list.addElement(temp.toString());
+    //list.addElement(temp.toString());
 }
     /**
      * 

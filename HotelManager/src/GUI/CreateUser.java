@@ -173,6 +173,7 @@ public class CreateUser extends javax.swing.JDialog {
     
     private String convertAccountType()
     {
+        accountType = accountTypeBox.getItemCount();
         switch(accountType)
         {
             case 0:

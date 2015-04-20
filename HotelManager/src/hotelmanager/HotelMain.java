@@ -18,10 +18,15 @@ public class HotelMain {
      */
     public static void main(String[] args) {
         
-        //Hotel hotel = Hotel.getInstance();
+        Hotel hotel = Hotel.getInstance();
         //hotel = Hotel.loadState();
         SQLiteJDBC database = SQLiteJDBC.getInstance();
-            
+            Room temp = new Room("1",5,250);
+            hotel.AddRoom(temp);
+            temp = new Room("2",4,250);
+            hotel.AddRoom(temp);
+            temp = new Room("3",3,250);
+            hotel.AddRoom(temp);
         //if(hotel == null)
         //{
             UserInformation admin = new UserInformation("Hotel", "Admin", "", "Admin", "Admin");

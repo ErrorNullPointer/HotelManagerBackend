@@ -15,6 +15,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.ListIterator;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -51,6 +54,14 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         user = aUser;
         firstNameLabel.setText(user.GetFirstName());
         roomList = hotel.searchAllRooms();
+        //ListIterator room = roomList.listIterator(); 
+//        while(room.hasNext())
+//        //for(Room temp : rooms)
+//        {
+//            Room temp = (Room)room.next();
+//            System.out.println(temp.toString());
+//        }
+        
         this.update();
     }
 
@@ -73,8 +84,14 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         smokingCheckBox = new javax.swing.JCheckBox();
         twoBedCheckBox = new javax.swing.JCheckBox();
         queenBedCheckBox = new javax.swing.JCheckBox();
-        StartLine = new javax.swing.JFormattedTextField();
-        EndLine = new javax.swing.JFormattedTextField();
+        StartMonth = new javax.swing.JComboBox();
+        StartDay = new javax.swing.JComboBox();
+        StartYear = new javax.swing.JComboBox();
+        EndMonth = new javax.swing.JComboBox();
+        EndDay = new javax.swing.JComboBox();
+        EndYear = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
@@ -125,16 +142,31 @@ public class CustomerMainWindow extends javax.swing.JFrame {
 
         queenBedCheckBox.setText("Queen Bed");
 
-        StartLine.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        StartLine.setText("4/1/2015");
-        StartLine.addActionListener(new java.awt.event.ActionListener() {
+        StartMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        StartMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StartLineActionPerformed(evt);
+                StartMonthActionPerformed(evt);
             }
         });
 
-        EndLine.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        EndLine.setText("4/2/15");
+        StartDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        StartDay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartDayActionPerformed(evt);
+            }
+        });
+
+        StartYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Year", "2015", "2016", "2017", "2018", "2019", "2020" }));
+
+        EndMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+
+        EndDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        EndYear.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Year", "2015", "2016", "2017", "2018", "2019", "2020" }));
+
+        jLabel2.setText("Start Date");
+
+        jLabel3.setText("End Date");
 
         jMenu1.setText("File");
 
@@ -166,14 +198,14 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(514, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(smokingCheckBox)
                         .addGap(30, 30, 30)
                         .addComponent(twoBedCheckBox)
                         .addGap(35, 35, 35)
                         .addComponent(queenBedCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(154, 154, 154)
                         .addComponent(jLabel1)
@@ -181,11 +213,25 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                         .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(logoutButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(StartLine, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EndLine, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(899, 899, 899))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(EndMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(EndDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(EndYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(StartMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(StartDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(StartYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,11 +250,19 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                     .addComponent(smokingCheckBox)
                     .addComponent(twoBedCheckBox)
                     .addComponent(queenBedCheckBox))
-                .addGap(45, 45, 45)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(StartLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EndLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                    .addComponent(StartMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StartDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StartYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(EndMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EndDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EndYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -224,7 +278,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
 
     public void update()
     {
-        if(roomList.size()>0)
+        if(roomList.size()>=0)
         {
             jList1.setModel(new ModelAdapter(roomList));
         }
@@ -241,18 +295,22 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             int index = jList1.getSelectedIndex();
-            if(roomList.size() > 0)
+            if(roomList.size() >= 0)
             {
                 Room temp = (Room)roomList.get(index);
-                Date Start, End;
-                DateFormat format = null;
-                Start = format.parse((String)StartLine.getText());
-                End = format.parse((String)EndLine.getText());
-
+                Date Start = new Date();
+                Date End = new Date();
+                Start.setYear(Integer.parseInt(StartYear.getSelectedItem().toString()));
+                Start.setMonth(StartMonth.getSelectedIndex());
+                Start.setDate(StartDay.getSelectedIndex());
+                End.setYear(Integer.parseInt(EndYear.getSelectedItem().toString()));
+                End.setMonth(EndMonth.getSelectedIndex());
+                End.setDate(EndDay.getSelectedIndex());
+                
                 hotel.makeReservation(Start,End,temp.getRoomNum(),false,user.GetEmailAddress()) ;
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(CustomerMainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(CustomerMainWindow.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_reserveButtonActionPerformed
 
@@ -279,9 +337,13 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         this.update();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void StartLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartLineActionPerformed
+    private void StartMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartMonthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_StartLineActionPerformed
+    }//GEN-LAST:event_StartMonthActionPerformed
+
+    private void StartDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartDayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StartDayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,11 +381,17 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField EndLine;
-    private javax.swing.JFormattedTextField StartLine;
+    private javax.swing.JComboBox EndDay;
+    private javax.swing.JComboBox EndMonth;
+    private javax.swing.JComboBox EndYear;
+    private javax.swing.JComboBox StartDay;
+    private javax.swing.JComboBox StartMonth;
+    private javax.swing.JComboBox StartYear;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

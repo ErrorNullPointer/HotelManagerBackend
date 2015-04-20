@@ -23,7 +23,7 @@ public class UserInformation {
     protected double AccountBalance = 0.0;
     
     /**
-     * Default Contructor
+     * Default Constructor
      * 
      * @param FirstName
      * @param LastName
@@ -37,7 +37,7 @@ public class UserInformation {
     }
     
     /**
-     * UserInformation Constuctor.
+     * UserInformation Constructor.
      * @param FirstName
      * @param LastName
      * @param Password

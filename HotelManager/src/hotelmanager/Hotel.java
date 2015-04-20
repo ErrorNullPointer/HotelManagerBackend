@@ -36,7 +36,7 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
     
     public static Hotel getInstance()
     {
-        Hotel temp = loadState();
+        Hotel temp = null;//loadState();
         if(temp == null)
         {
             if(instance == null)
@@ -400,8 +400,8 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
     public boolean makeReservation(Date s, Date e, String room, boolean paid, String ID)//make a reservation
     {
         boolean result = false;
-        if(current != null)
-        {
+//        if(current != null)
+//        {
             for(int x = 0; x < rooms.size(); x++)// check each room until you find the one you are looking for, then add a reservation
             {
                 Room Temp = rooms.getRoom(x);
@@ -410,13 +410,14 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
                     Reserve temp = Reserve.makeReserve(s, e, ID, room, paid);
                     if(Temp.addReservation(temp))
                     {
+                        reserveList.addReservation(temp);
                         result = true;
                     }
                     break;
                 }
                 //else false
             }
-        }
+//        }
 
         return result;
     }

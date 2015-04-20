@@ -94,6 +94,10 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        UserID = new javax.swing.JTextField();
+        ResID = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         logoutItem = new javax.swing.JMenuItem();
@@ -151,6 +155,10 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jList1);
 
         jTabbedPane2.addTab("Reservations", jScrollPane2);
+
+        jLabel1.setText("User ID");
+
+        jLabel3.setText("Reservation ID");
 
         FileMenu.setText("File");
 
@@ -228,23 +236,35 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(CheckInButton)
-                .addGap(32, 32, 32)
-                .addComponent(CheckOutButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(logoutButton)
-                .addGap(23, 23, 23))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(CheckInButton)
+                        .addGap(32, 32, 32)
+                        .addComponent(CheckOutButton)
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(UserID))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(ResID, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(logoutButton)
+                        .addGap(23, 23, 23))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +277,11 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(CheckInButton)
-                        .addComponent(CheckOutButton)))
+                        .addComponent(CheckOutButton)
+                        .addComponent(UserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ResID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
@@ -362,7 +386,8 @@ public class MainWindow extends javax.swing.JFrame {
      */
     private void CheckInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckInButtonActionPerformed
         // TODO add your handling code here:
-        user.checkIn(new UserInformation("test", "test", "test", "test", "Customer"));
+        //user.checkIn(new UserInformation("test", "test", "test", "test", "Customer"));
+        hotel.checkInReservation(UserID.getText(), ResID.getText());
         
     }//GEN-LAST:event_CheckInButtonActionPerformed
 
@@ -419,8 +444,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton CheckInButton;
     private javax.swing.JButton CheckOutButton;
     private javax.swing.JMenu FileMenu;
+    private javax.swing.JTextField ResID;
+    private javax.swing.JTextField UserID;
     private javax.swing.JMenuItem createUserMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
