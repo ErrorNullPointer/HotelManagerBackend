@@ -341,8 +341,8 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
     public String checkInReservation(String guid, String reservatinId)//check a user in
     {
         String result = "Item Not found";
-        if(current!= null && current.getType().equals("Admin"))
-        {
+        //if(current!= null && current.getType().equals("Admin"))
+        //{
             ArrayList<Reserve> userReservations = findAllUserReservations(guid);
             for(int x = 0; x < userReservations.size(); x++)
             {
@@ -352,9 +352,9 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
                     result = " User has been checked in";
                 }
             }
-        }
-        else 
-                result = " You do not have permisson for this action.";
+        //}
+        //else 
+        //        result = " You do not have permisson for this action.";
         return result;
         
     }

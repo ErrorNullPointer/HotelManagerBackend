@@ -121,11 +121,12 @@ public class Reserve implements java.io.Serializable{
     public boolean isFree(Reserve existing)
     {
         // does some logice to figure our of two reservations are compatable.  
-        boolean isAfter = (Start.after(existing.getEnd()));
-        boolean isBefore = (End.before(existing.getStart()));
-        boolean notStartBetween = Start.before(existing.getStart());
-        boolean notEndBetween = End.after(existing.getEnd());
-        boolean startBeforeEndAfter = Start.before(existing.getStart()) && End.after(existing.getEnd());
+        //boolean isAfter = (Start.after(existing.getEnd()));
+        //boolean isBefore = (End.before(Start));
+        boolean startAfterEndAfter = (Start.after(existing.getStart()) && Start.before(existing.getEnd())) && (End.after(existing.getEnd()));
+        boolean startBeforeEndBefore = (Start.before(existing.getStart())) && (End.before(existing.getEnd()) && (End.after(existing.getStart())));
+        boolean startAfterEndBefore = (Start.after(existing.getStart())) && (End.before(existing.getEnd()));
+        boolean startBeforeEndAfter = (Start.before(existing.getStart())) && (End.after(existing.getEnd()));
         boolean sameStart = Start.equals(existing.getStart());
         boolean sameEnd = End.equals(existing.getEnd());
         /*
@@ -140,7 +141,7 @@ public class Reserve implements java.io.Serializable{
         System.out.println("notStartBetween=" + notStartBetween);
         */
         
-        if(!(isAfter || isBefore || notEndBetween || notStartBetween) && !startBeforeEndAfter)
+        if(!sameStart && !sameEnd && !startBeforeEndAfter && !startAfterEndBefore && !startBeforeEndBefore && !startAfterEndAfter)
             return true;
         else
             return false;
