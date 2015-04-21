@@ -236,7 +236,7 @@ public class CreateUser extends javax.swing.JDialog {
                     }
             }
         }
-        
+        JOptionPane.showMessageDialog(null, "User Successfully Created!");
     }//GEN-LAST:event_createUserButtonActionPerformed
     
     /**

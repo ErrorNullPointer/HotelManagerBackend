@@ -7,6 +7,7 @@ package GUI;
 import Resources.RoomDescription;
 import hotelmanager.*;
 import Resources.SQLiteJDBC;
+import javax.swing.JOptionPane;
 /**
  *
  * @author PikeMobile
@@ -135,6 +136,7 @@ public class RoomOptions extends javax.swing.JDialog {
         jLabel5.setText("Price per Night");
 
         priceTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        priceTextField.setText("100.00");
         priceTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceTextFieldActionPerformed(evt);
@@ -259,26 +261,44 @@ public class RoomOptions extends javax.swing.JDialog {
                 features += describe.twobeds;
             }
         if(newRoom)
-        { 
-            currentRoom = new Room(roomNumberField.getText(), features, Double.parseDouble(priceTextField.getText()));
-            Hotel hotel = Hotel.getInstance();
-            if(hotel.AddRoom(currentRoom))
+        {
+            boolean goodRoom = (!roomNumberField.getText().equals(""));
+            if(goodRoom)
             {
-                System.out.println(currentRoom.describeRoom());
-            }
+                Double price = Double.parseDouble(priceTextField.getText());
+                String roomNum = roomNumberField.getText();
+            
+                currentRoom = new Room(roomNum, features, price );
+                Hotel hotel = Hotel.getInstance();
+                if(hotel.AddRoom(currentRoom))
+                {
+                    System.out.println(currentRoom.describeRoom());
+                    JOptionPane.showMessageDialog(null, "Room Updated!");
+                }
+                else
+                {
+                    System.out.println("Error Adding Room");
+                    JOptionPane.showMessageDialog(null, "Room already exists.");
+                } 
+            }  
             else
-            {
-                System.out.println("Error Adding Room");
-            }
+                JOptionPane.showMessageDialog(null, "Room number invalid.");
         }
         else
         {
-            currentRoom.setPrice(Double.parseDouble(priceTextField.getText()));
-            currentRoom.setRoomInfo(features);
-            currentRoom.setRoomNumber(roomNumberField.toString());
-            System.out.println(currentRoom.describeRoom());
+            boolean goodRoom = (!roomNumberField.getText().equals(""));
+            if(goodRoom)
+            {
+                currentRoom.setPrice(Double.parseDouble(priceTextField.getText()));
+                currentRoom.setRoomInfo(features);
+                currentRoom.setRoomNumber(roomNumberField.toString());
+                System.out.println(currentRoom.describeRoom());
+                JOptionPane.showMessageDialog(null, "Room Updated!");
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Room number invalid.");
         }
-        
+        //JOptionPane.showMessageDialog(null, "Room Updated!");
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_AcceptButtonActionPerformed

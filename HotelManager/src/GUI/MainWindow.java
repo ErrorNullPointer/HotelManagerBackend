@@ -355,8 +355,15 @@ public class MainWindow extends javax.swing.JFrame {
         //RoomOptions roomCreator = new RoomOptions(this, true);
         //roomCreator.setVisible(true);
         int index = jList.getSelectedIndex();
-        user.updateRoom(hotel.getRoom(index));
-        this.update();
+        if(index == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Please select a room from the 'Search Rooms' list.");
+        }
+        else
+        {
+            user.updateRoom(hotel.getRoom(index));
+            this.update();
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
@@ -388,6 +395,8 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         //user.checkIn(new UserInformation("test", "test", "test", "test", "Customer"));
         hotel.checkInReservation(UserID.getText(), ResID.getText());
+        reservationList = hotel.getReservations();
+        this.update();
         
     }//GEN-LAST:event_CheckInButtonActionPerformed
 

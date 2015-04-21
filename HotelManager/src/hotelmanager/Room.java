@@ -142,13 +142,14 @@ public class Room implements java.io.Serializable{
     public boolean checkReservations(Reserve temp)//check if reservation willl work with an eisting reservation
     {
         if(temp != null)
+        {
             for(Reserve x : reservations)
             {
                 //System.out.println("!x.isFree(temp) = "+!x.isFree(temp));
                 if(!temp.isFree(x))
                     return false;
             }
-        
+        }
             
         return true;
     }

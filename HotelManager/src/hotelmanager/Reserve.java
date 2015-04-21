@@ -126,6 +126,8 @@ public class Reserve implements java.io.Serializable{
         boolean notStartBetween = Start.before(existing.getStart());
         boolean notEndBetween = End.after(existing.getEnd());
         boolean startBeforeEndAfter = Start.before(existing.getStart()) && End.after(existing.getEnd());
+        boolean sameStart = Start.equals(existing.getStart());
+        boolean sameEnd = End.equals(existing.getEnd());
         /*
         System.out.println("Start=" + Start);
         System.out.println("End=" + End);
@@ -138,7 +140,7 @@ public class Reserve implements java.io.Serializable{
         System.out.println("notStartBetween=" + notStartBetween);
         */
         
-        if((isAfter || isBefore || notEndBetween || notStartBetween) && !startBeforeEndAfter)
+        if(!(isAfter || isBefore || notEndBetween || notStartBetween) && !startBeforeEndAfter)
             return true;
         else
             return false;

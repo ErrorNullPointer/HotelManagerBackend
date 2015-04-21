@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -295,7 +296,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             int index = jList1.getSelectedIndex();
-            if(roomList.size() >= 0)
+            if(roomList.size() >= 0 && index != -1)
             {
                 Room temp = (Room)roomList.get(index);
                 Date Start = new Date();
@@ -307,11 +308,22 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                 End.setMonth(EndMonth.getSelectedIndex());
                 End.setDate(EndDay.getSelectedIndex());
                 
-                hotel.makeReservation(Start,End,temp.getRoomNum(),false,user.GetEmailAddress()) ;
+                if(!hotel.makeReservation(Start,End,temp.getRoomNum(),false,user.GetEmailAddress()))
+                {
+                    JOptionPane.showMessageDialog(null, "Failed to Reserve Room.");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Room Reserved!");
+                }
             }
+            if(index == -1)
+        {JOptionPane.showMessageDialog(null, "Please Select a room first.");}
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please Select a valid date.");
             Logger.getLogger(CustomerMainWindow.class.getName()).log(Level.SEVERE, null, e);
         }
+        
     }//GEN-LAST:event_reserveButtonActionPerformed
 
     private void smokingCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smokingCheckBoxActionPerformed
