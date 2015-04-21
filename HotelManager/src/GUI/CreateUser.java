@@ -229,6 +229,7 @@ public class CreateUser extends javax.swing.JDialog {
                         this.clearFields();
                         this.setVisible(false);
                         this.dispose();
+                        JOptionPane.showMessageDialog(null, "User Successfully Created!");
                     }
                     else
                     {
@@ -236,7 +237,7 @@ public class CreateUser extends javax.swing.JDialog {
                     }
             }
         }
-        JOptionPane.showMessageDialog(null, "User Successfully Created!");
+        
     }//GEN-LAST:event_createUserButtonActionPerformed
     
     /**

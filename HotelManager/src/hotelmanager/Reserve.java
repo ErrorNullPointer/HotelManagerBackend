@@ -121,8 +121,6 @@ public class Reserve implements java.io.Serializable{
     public boolean isFree(Reserve existing)
     {
         // does some logice to figure our of two reservations are compatable.  
-        //boolean isAfter = (Start.after(existing.getEnd()));
-        //boolean isBefore = (End.before(Start));
         boolean startAfterEndAfter = (Start.after(existing.getStart()) && Start.before(existing.getEnd())) && (End.after(existing.getEnd()));
         boolean startBeforeEndBefore = (Start.before(existing.getStart())) && (End.before(existing.getEnd()) && (End.after(existing.getStart())));
         boolean startAfterEndBefore = (Start.after(existing.getStart())) && (End.before(existing.getEnd()));

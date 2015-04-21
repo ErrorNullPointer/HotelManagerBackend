@@ -291,7 +291,7 @@ public class RoomOptions extends javax.swing.JDialog {
             {
                 currentRoom.setPrice(Double.parseDouble(priceTextField.getText()));
                 currentRoom.setRoomInfo(features);
-                currentRoom.setRoomNumber(roomNumberField.toString());
+                currentRoom.setRoomNumber(roomNumberField.getText());
                 System.out.println(currentRoom.describeRoom());
                 JOptionPane.showMessageDialog(null, "Room Updated!");
             }

@@ -397,6 +397,7 @@ public class MainWindow extends javax.swing.JFrame {
         hotel.checkInReservation(UserID.getText(), ResID.getText());
         reservationList = hotel.getReservations();
         this.update();
+        JOptionPane.showMessageDialog(null, "Guest has been checked in!");
         
     }//GEN-LAST:event_CheckInButtonActionPerformed
 
