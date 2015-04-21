@@ -300,10 +300,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                 Room temp = (Room)roomList.get(index);
                 Date Start = new Date();
                 Date End = new Date();
-                Start.setYear(Integer.parseInt(StartYear.getSelectedItem().toString()));
+                Start.setYear(Integer.parseInt(StartYear.getSelectedItem().toString())-1900);
                 Start.setMonth(StartMonth.getSelectedIndex());
                 Start.setDate(StartDay.getSelectedIndex());
-                End.setYear(Integer.parseInt(EndYear.getSelectedItem().toString()));
+                End.setYear(Integer.parseInt(EndYear.getSelectedItem().toString())-1900);
                 End.setMonth(EndMonth.getSelectedIndex());
                 End.setDate(EndDay.getSelectedIndex());
                 

@@ -341,7 +341,7 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
     public String checkInReservation(String guid, String reservatinId)//check a user in
     {
         String result = "Item Not found";
-        if(current.getType().equals("Admin"))
+        if(current!= null && current.getType().equals("Admin"))
         {
             ArrayList<Reserve> userReservations = findAllUserReservations(guid);
             for(int x = 0; x < userReservations.size(); x++)

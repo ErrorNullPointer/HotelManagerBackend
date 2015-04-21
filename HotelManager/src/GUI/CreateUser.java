@@ -154,7 +154,7 @@ public class CreateUser extends javax.swing.JDialog {
 
     private void accountTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountTypeBoxActionPerformed
         // TODO add your handling code here:
-        accountType = accountTypeBox.getItemCount();
+        accountType = accountTypeBox.getSelectedIndex();
     }//GEN-LAST:event_accountTypeBoxActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
@@ -173,7 +173,7 @@ public class CreateUser extends javax.swing.JDialog {
     
     private String convertAccountType()
     {
-        accountType = accountTypeBox.getItemCount();
+        accountType = accountTypeBox.getSelectedIndex();
         switch(accountType)
         {
             case 0:
@@ -183,7 +183,7 @@ public class CreateUser extends javax.swing.JDialog {
             case 2:
                 return "Admin";
             default:
-                return null;        
+                return "Customer";
         }
     }
     

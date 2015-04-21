@@ -15,7 +15,7 @@ import Resources.SQLiteJDBC;
 public class UserLogin extends javax.swing.JDialog {
 
     static UserLogin instance = new UserLogin(null, true);
-    
+    private Hotel hotel = Hotel.getInstance();
     /**
      * @return 
      */
@@ -142,6 +142,8 @@ public class UserLogin extends javax.swing.JDialog {
         UserInformation user = database.getUserInformation(email);
         if(user.login(email, password))
         {
+            //hotel.current.setType("Admin");
+            
             this.setVisible(false);
         }
         else
