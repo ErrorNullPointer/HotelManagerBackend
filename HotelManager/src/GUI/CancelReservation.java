@@ -41,6 +41,7 @@ public class CancelReservation extends javax.swing.JFrame {
         btnOK = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         ReserveID = new javax.swing.JTextField();
+        btnDone = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +61,13 @@ public class CancelReservation extends javax.swing.JFrame {
 
         jLabel1.setText("Enter the reservation ID you wish to cancel and click OK.");
 
+        btnDone.setText("Done");
+        btnDone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoneActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,7 +84,9 @@ public class CancelReservation extends javax.swing.JFrame {
                         .addComponent(ReserveID, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 181, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(btnDone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -90,7 +100,9 @@ public class CancelReservation extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnOK)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOK)
+                    .addComponent(btnDone))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -98,6 +110,7 @@ public class CancelReservation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+
         try{
             if(hotel.adminDeleteReservation(user.GetEmailAddress(), ReserveID.getText()))
             {
@@ -111,6 +124,10 @@ public class CancelReservation extends javax.swing.JFrame {
             }
         } catch(Exception e){JOptionPane.showMessageDialog(null, "No Reservations to delete");}
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDoneActionPerformed
 
     public void update()
     {
@@ -158,6 +175,7 @@ public class CancelReservation extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListofRes;
     private javax.swing.JTextField ReserveID;
+    private javax.swing.JButton btnDone;
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

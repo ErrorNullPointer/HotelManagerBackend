@@ -40,6 +40,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     static private UserInformation user = null;
     private Hotel hotel = Hotel.getInstance();
     private ArrayList<Room> roomList = null;
+    static private ArrayList<Reserve> ResList = null;
     RoomDescription describe = new RoomDescription();
 //    UtilDateModel model = new UtilDateModel();
 //JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -56,6 +57,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         user = aUser;
         firstNameLabel.setText(user.GetFirstName());
         roomList = hotel.searchAllRooms();
+        if(ResList == null)
+        {
+            btnCancelRes.setEnabled(false);
+        }
         //ListIterator room = roomList.listIterator(); 
 //        while(room.hasNext())
 //        //for(Room temp : rooms)
@@ -95,6 +100,8 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnCancelRes = new javax.swing.JButton();
+        SuiteCheckBox = new javax.swing.JCheckBox();
+        HandicapCheckBox = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
@@ -177,6 +184,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
             }
         });
 
+        SuiteCheckBox.setText("Suite");
+
+        HandicapCheckBox.setText("Handicap");
+
         jMenu1.setText("File");
 
         logoutMenu.setText("Logout");
@@ -199,20 +210,6 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(smokingCheckBox)
-                        .addGap(30, 30, 30)
-                        .addComponent(twoBedCheckBox)
-                        .addGap(35, 35, 35)
-                        .addComponent(queenBedCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(154, 154, 154)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(logoutButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -232,12 +229,34 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                                 .addComponent(StartYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnCancelRes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(reserveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(smokingCheckBox)
+                                .addGap(18, 18, 18)
+                                .addComponent(twoBedCheckBox)
+                                .addGap(18, 18, 18)
+                                .addComponent(queenBedCheckBox)
+                                .addGap(18, 18, 18)
+                                .addComponent(SuiteCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(HandicapCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addGap(13, 13, 13))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnCancelRes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(reserveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(logoutButton))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +276,9 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(smokingCheckBox)
                     .addComponent(twoBedCheckBox)
-                    .addComponent(queenBedCheckBox))
+                    .addComponent(queenBedCheckBox)
+                    .addComponent(SuiteCheckBox)
+                    .addComponent(HandicapCheckBox))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(StartMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,6 +344,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                     }
                     else
                     {
+                        btnCancelRes.setEnabled(true);
                         JOptionPane.showMessageDialog(null, "Room Reserved!");
                     }
                 }
@@ -361,6 +383,14 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         {
             total += describe.twobeds;
         }
+        if(HandicapCheckBox.isSelected())
+        {
+            total += describe.handicap;
+        }
+        if(SuiteCheckBox.isSelected())
+        {
+            total += describe.suite;
+        }
         roomList = hotel.searchRooms(total);
         this.update();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -376,6 +406,12 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     private void btnCancelResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelResActionPerformed
         CancelReservation ResC = new CancelReservation(user);
         ResC.setVisible(true);
+        ResList = hotel.findAllUserReservations(user.GetEmailAddress());
+        if(ResList == null)
+        {
+            btnCancelRes.setEnabled(false);
+        }
+        //ResC.setVisible(false);
     }//GEN-LAST:event_btnCancelResActionPerformed
 
     /**
@@ -417,9 +453,11 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox EndDay;
     private javax.swing.JComboBox EndMonth;
     private javax.swing.JComboBox EndYear;
+    private javax.swing.JCheckBox HandicapCheckBox;
     private javax.swing.JComboBox StartDay;
     private javax.swing.JComboBox StartMonth;
     private javax.swing.JComboBox StartYear;
+    private javax.swing.JCheckBox SuiteCheckBox;
     private javax.swing.JButton btnCancelRes;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JButton jButton1;

@@ -330,6 +330,18 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
      */
     public boolean adminDeleteReservation(String guid, String reservatinId)//allos you to delete a reservetion that is not attached to your guid
     {   
+        ArrayList<Reserve> userReservations = findAllUserReservations(guid);
+        for(int x = 0; x < userReservations.size(); x++)
+        {
+            if(userReservations.get(x).getReserveID().equals(reservatinId))
+            {
+                userReservations.remove(x);
+                Room temp = getRoom(x);
+                temp.removeReservationWithUser(guid, reservatinId);
+            }
+        }
+        
+        
         return reserveList.remove(guid, reservatinId);
     }
     

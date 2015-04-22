@@ -25,12 +25,25 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
     private Hotel hotel = Hotel.getInstance();
     private DefaultListModel model;
     private ArrayList reservationList = null;
+    private ArrayList roomList = null;
+    
     //DefaultListModel model = new DefaultListModel();
     /**
      * Creates new form EmployeeMainWindow
      */
-    public EmployeeMainWindow() {
+    public EmployeeMainWindow(UserInformation aUser) {
         initComponents();
+        user = aUser;
+        if(user.GetEmailAddress().equals("Admin") && user.GetPassword().equals(""))
+        {
+            CreateUser updateUser = new CreateUser(this, true);
+            updateUser.setFields(user);
+            updateUser.setVisible(true);
+        }
+        roomList = hotel.searchAllRooms();
+        reservationList = hotel.getReservations();
+        this.update();
+        nameLabel.setText(user.GetFirstName());
     }
 
     /**
@@ -320,6 +333,7 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
     private void update()
     {
         jList.setModel(new ModelAdapter(hotel.searchAllRooms()));
+        jList1.setModel(new ModelAdapter(reservationList));
     }
     
     private void createUserMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserMenuActionPerformed
@@ -440,7 +454,7 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeMainWindow().setVisible(true);
+                new EmployeeMainWindow(user).setVisible(true);
             }
         });
     }

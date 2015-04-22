@@ -55,19 +55,6 @@ public class MainWindow extends javax.swing.JFrame {
             updateUser.setVisible(true);
         }
         nameLabel.setText(user.GetFirstName());
-        
-        //jTable2.setModel(model);
-//        RoomList all = hotel.searchAllRooms();
-//        Iterator it = all.it();
-//        int i = 0;
-//        
-//        while(it.hasNext())
-//        {
-//            Room temp = (Room)it.next();
-//            model.addElement(temp.toString());
-//            System.out.println(temp.toString());
-//            i++;
-//        }
         roomList = hotel.searchAllRooms();
         reservationList = hotel.getReservations();
         this.update();

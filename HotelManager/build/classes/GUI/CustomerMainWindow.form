@@ -49,21 +49,6 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="smokingCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="twoBedCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="queenBedCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="firstNameLabel" min="-2" pref="93" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -87,13 +72,40 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="561" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnCancelRes" max="32767" attributes="0"/>
-                          <Component id="reserveButton" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="smokingCheckBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="twoBedCheckBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="queenBedCheckBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="SuiteCheckBox" min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="HandicapCheckBox" min="-2" pref="81" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" min="-2" pref="561" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnCancelRes" max="32767" attributes="0"/>
+                                  <Component id="reserveButton" min="-2" pref="125" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="firstNameLabel" min="-2" pref="93" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -120,6 +132,8 @@
                   <Component id="smokingCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="twoBedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="queenBedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SuiteCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="HandicapCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -392,6 +406,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelResActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="SuiteCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Suite"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="HandicapCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Handicap"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
