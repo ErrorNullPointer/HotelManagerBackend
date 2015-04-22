@@ -11,6 +11,7 @@ import hotelmanager.UserInformation;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import Resources.ModelAdapter;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,7 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
     static private UserInformation user = null;
     private Hotel hotel = Hotel.getInstance();
     private DefaultListModel model;
+    private ArrayList reservationList = null;
     //DefaultListModel model = new DefaultListModel();
     /**
      * Creates new form EmployeeMainWindow
@@ -49,8 +51,13 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList = new javax.swing.JList();
-        CheckInButton = new javax.swing.JButton();
-        CheckOutButton = new javax.swing.JButton();
+        CheckInButton1 = new javax.swing.JButton();
+        CheckOutButton1 = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        UserID = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        ResID = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         logoutItem = new javax.swing.JMenuItem();
@@ -95,19 +102,30 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
 
         jTabbedPane1.addTab("Search Rooms", jScrollPane1);
 
-        CheckInButton.setText("Check In");
-        CheckInButton.addActionListener(new java.awt.event.ActionListener() {
+        CheckInButton1.setText("Check In");
+        CheckInButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckInButtonActionPerformed(evt);
+                CheckInButton1ActionPerformed(evt);
             }
         });
 
-        CheckOutButton.setText("Check Out");
-        CheckOutButton.addActionListener(new java.awt.event.ActionListener() {
+        CheckOutButton1.setText("Check Out");
+        CheckOutButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CheckOutButtonActionPerformed(evt);
+                CheckOutButton1ActionPerformed(evt);
             }
         });
+
+        btnPay.setText("Pay");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("User ID");
+
+        jLabel3.setText("Reservation number");
 
         FileMenu.setText("File");
         FileMenu.setEnabled(false);
@@ -188,39 +206,60 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(CheckInButton)
-                .addGap(32, 32, 32)
-                .addComponent(CheckOutButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(logoutButton)
-                .addGap(23, 23, 23))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CheckInButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CheckOutButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UserID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ResID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(logoutButton)
+                        .addGap(23, 23, 23))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameLabel)
+                            .addComponent(jLabel2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(UserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ResID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(CheckInButton1)
+                                .addComponent(CheckOutButton1)
+                                .addComponent(btnPay)))))
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nameLabel)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CheckInButton)
-                        .addComponent(CheckOutButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                     .addComponent(jTabbedPane2))
                 .addContainerGap())
         );
@@ -237,17 +276,6 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
         this.dispose();
 
     }//GEN-LAST:event_logoutButtonActionPerformed
-
-    private void CheckInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckInButtonActionPerformed
-        // TODO add your handling code here:
-        user.checkIn(new UserInformation("test", "test", "test", "test", "Customer"));
-
-    }//GEN-LAST:event_CheckInButtonActionPerformed
-
-    private void CheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckOutButtonActionPerformed
-        // TODO add your handling code here:
-        user.checkOut(new UserInformation("test", "test", "test", "test", "Customer"));
-    }//GEN-LAST:event_CheckOutButtonActionPerformed
 
     private void logoutItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutItemActionPerformed
         // TODO add your handling code here:
@@ -317,6 +345,71 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
         }
     }//GEN-LAST:event_userTableActionPerformed
 
+    private void CheckInButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckInButton1ActionPerformed
+        if(!(UserID.getText().equals("")|| ResID.getText().equals("")))
+        {
+            if(hotel.checkInReservation(UserID.getText(), ResID.getText()))
+            {
+                reservationList = hotel.getReservations();
+                this.update();
+                JOptionPane.showMessageDialog(null, "Guest has been checked in!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Invalid User ID or Reservation number.");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a User ID and Reservation number");
+        }
+
+    }//GEN-LAST:event_CheckInButton1ActionPerformed
+
+    private void CheckOutButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckOutButton1ActionPerformed
+        if(!(UserID.getText().equals("")|| ResID.getText().equals("")))
+        {
+            if(hotel.checkOutReservation(UserID.getText(), ResID.getText()))
+            {
+                hotel.adminDeleteReservation(UserID.getText(), ResID.getText());
+                reservationList = hotel.getReservations();
+                UserID.setText("");
+                ResID.setText("");
+                this.update();
+                JOptionPane.showMessageDialog(null, "Guest has been checked out!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Invalid User ID or Reservation number.");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a User ID and Reservation number");
+        }
+
+    }//GEN-LAST:event_CheckOutButton1ActionPerformed
+
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        if(!(UserID.getText().equals("")|| ResID.getText().equals("")))
+        {
+            if(hotel.payReservation(UserID.getText(), ResID.getText()))
+            {
+                reservationList = hotel.getReservations();
+                this.update();
+                JOptionPane.showMessageDialog(null, "Guest has paid for the room!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Invalid User ID or Reservation number.");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a User ID and Reservation number");
+        }
+    }//GEN-LAST:event_btnPayActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -353,11 +446,16 @@ private SQLiteJDBC database = SQLiteJDBC.getInstance();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CheckInButton;
-    private javax.swing.JButton CheckOutButton;
+    private javax.swing.JButton CheckInButton1;
+    private javax.swing.JButton CheckOutButton1;
     private javax.swing.JMenu FileMenu;
+    private javax.swing.JTextField ResID;
+    private javax.swing.JTextField UserID;
+    private javax.swing.JButton btnPay;
     private javax.swing.JMenuItem createUserMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;

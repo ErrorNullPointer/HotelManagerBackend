@@ -10,6 +10,7 @@ import Resources.RoomDescription;
 import Resources.SQLiteJDBC;
 import hotelmanager.Hotel;
 import hotelmanager.Room;
+import hotelmanager.Reserve;
 import hotelmanager.UserInformation;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -93,10 +94,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         EndYear = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnCancelRes = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logoutMenu = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,6 +170,13 @@ public class CustomerMainWindow extends javax.swing.JFrame {
 
         jLabel3.setText("End Date");
 
+        btnCancelRes.setText("Cancel Reservation");
+        btnCancelRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelResActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         logoutMenu.setText("Logout");
@@ -181,25 +189,15 @@ public class CustomerMainWindow extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Room Options");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(reserveButton)
-                .addGap(67, 67, 67))
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(smokingCheckBox)
                         .addGap(30, 30, 30)
@@ -232,7 +230,14 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                                 .addComponent(StartDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(StartYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCancelRes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reserveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,8 +247,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(firstNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelRes)
+                .addGap(38, 38, 38)
                 .addComponent(reserveButton)
-                .addGap(27, 27, 27))
+                .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -366,6 +373,11 @@ public class CustomerMainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_StartDayActionPerformed
 
+    private void btnCancelResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelResActionPerformed
+        CancelReservation ResC = new CancelReservation(user);
+        ResC.setVisible(true);
+    }//GEN-LAST:event_btnCancelResActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -408,6 +420,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox StartDay;
     private javax.swing.JComboBox StartMonth;
     private javax.swing.JComboBox StartYear;
+    private javax.swing.JButton btnCancelRes;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -415,7 +428,6 @@ public class CustomerMainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutButton;
