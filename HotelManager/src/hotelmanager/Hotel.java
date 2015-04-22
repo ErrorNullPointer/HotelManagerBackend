@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import Resources.Iterator;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -328,8 +329,8 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
      * @return 
      */
     public boolean adminDeleteReservation(String guid, String reservatinId)//allos you to delete a reservetion that is not attached to your guid
-    {
-        return reserveList.remove(guid, reservatinId);      
+    {   
+        return reserveList.remove(guid, reservatinId);
     }
     
     /**

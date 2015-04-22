@@ -167,14 +167,15 @@ public class Room implements java.io.Serializable{
     {
         //String result = "Reservation was not added: Room is unavailable at that time.";
         boolean result = false;
-        reservationCount++; 
         if(checkReservations(temp))
         {
+            reservationCount++; 
             temp.setReserveID(reservationCount);
             reservations.add(temp);
             
             //result = "Reservation added";
             result = true;
+            
         }
         return result; 
     }
@@ -204,15 +205,16 @@ public class Room implements java.io.Serializable{
      * @param reservation
      * @return 
      */
-    public String removeReservationWithUser(String userID, String reservation)//removes the reservation of a verterin user
+    public Boolean removeReservationWithUser(String userID, String reservation)//removes the reservation of a verterin user
     {
-        String result = "Reservation for that user was not found";
+        Boolean result = false;
         for(int x = 0; x<reservations.size(); x++)
         {
             
-            if(reservations.get(x).getUser().equals(userID) && reservations.get(x).getUser().equals(userID))
+            if(reservations.get(x).getUser().equals(userID) && reservations.get(x).getReserveID().equals(reservation))
             {
-                result = "Reservation: " + reservation + " by User: " + userID + " has been removed";
+                reservations.remove(x);
+                result = true;
             }
         }
         

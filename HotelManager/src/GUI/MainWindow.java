@@ -420,7 +420,10 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         //user.checkOut(new UserInformation("test", "test", "test", "test", "Customer"));
         hotel.checkOutReservation(UserID.getText(), ResID.getText());
+        hotel.adminDeleteReservation(UserID.getText(), ResID.getText());
         reservationList = hotel.getReservations();
+        UserID.setText("");
+        ResID.setText("");
         this.update();
         JOptionPane.showMessageDialog(null, "Guest has been checked out!");
     }//GEN-LAST:event_CheckOutButtonActionPerformed

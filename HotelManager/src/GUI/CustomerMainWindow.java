@@ -302,10 +302,10 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                 Date Start = new Date();
                 Date End = new Date();
                 Start.setYear(Integer.parseInt(StartYear.getSelectedItem().toString())-1900);
-                Start.setMonth(StartMonth.getSelectedIndex());
+                Start.setMonth(StartMonth.getSelectedIndex()-1);
                 Start.setDate(StartDay.getSelectedIndex());
                 End.setYear(Integer.parseInt(EndYear.getSelectedItem().toString())-1900);
-                End.setMonth(EndMonth.getSelectedIndex());
+                End.setMonth(EndMonth.getSelectedIndex()-1);
                 End.setDate(EndDay.getSelectedIndex());
                 boolean startafterEnd = (Start.after(End));
                 if(!startafterEnd)

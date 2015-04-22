@@ -26,10 +26,6 @@ public class ReservationList implements java.io.Serializable{
     
     public boolean addReservation(Reserve temp)
     {
-        if(false)
-        {
-            return false;
-        }
         list.add(temp);
         return true;
     }
@@ -47,6 +43,7 @@ public class ReservationList implements java.io.Serializable{
         {
             if(userReservations.get(x).getReserveID().equals(reservatinId))
             {
+                list.remove(x);
                 userReservations.remove(x);
                 return true;
             }
