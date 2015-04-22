@@ -1,6 +1,7 @@
 package GUI;
 import hotelmanager.*;
 import Resources.SQLiteJDBC;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -135,20 +136,25 @@ public class UserLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_EmailFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
         String email = EmailField.getText();
         String password = PasswordField.getText();
         SQLiteJDBC database = SQLiteJDBC.getInstance();
         UserInformation user = database.getUserInformation(email);
-        if(user.login(email, password))
+        if(!(email.equals("")|| password.equals("")))
         {
-            //hotel.current.setType("Admin");
-            
-            this.setVisible(false);
+            try {
+                user.login(email, password);
+            {
+                this.setVisible(false);
+            }
+            } catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Invalid login credentials!\nPlease try again.");
+            }
         }
         else
         {
-            
+            JOptionPane.showMessageDialog(null, "Please enter an email and password");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

@@ -339,9 +339,9 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
      * @param reservatinId
      * @return 
      */
-    public String checkInReservation(String guid, String reservatinId)//check a user in
+    public Boolean checkInReservation(String guid, String reservatinId)//check a user in
     {
-        String result = "Item Not found";
+        boolean result = false;
         //if(current!= null && current.getType().equals("Admin"))
         //{
             ArrayList<Reserve> userReservations = findAllUserReservations(guid);
@@ -350,7 +350,7 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
                 if(userReservations.get(x).getReserveID().equals(reservatinId))
                 {
                     userReservations.get(x).checkIn();
-                    result = " User has been checked in";
+                    result = true;
                 }
             }
         //}
@@ -359,16 +359,16 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
-    public String payReservation(String guid, String reservatinId)//pay for a reservation
+    public Boolean payReservation(String guid, String reservatinId)//pay for a reservation
     {
-        String result = "Item Not found";
+        boolean result = false;
         ArrayList<Reserve> userReservations = findAllUserReservations(guid);
             for(int x = 0; x < userReservations.size(); x++)
             {
                 if(userReservations.get(x).getReserveID().equals(reservatinId))
                 {
                     userReservations.get(x).payForRoom();
-                    result = " User has been checked in";
+                    result = true;
                 }
             }
         
@@ -376,9 +376,9 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
         return result;
         
     }
-    public String checkOutReservation(String guid, String reservationId)//check out or a reservation
+    public Boolean checkOutReservation(String guid, String reservationId)//check out or a reservation
     {
-        String result = "Item Not found";
+        boolean result = false;
         //if(current.getType().equals("Admin"))
         //{
             ArrayList<Reserve> userReservations = findAllUserReservations(guid);
@@ -386,7 +386,7 @@ public class Hotel implements java.io.Serializable{// this allows us to save all
             {
                 if(userReservations.get(x).getReserveID().equals(reservationId))
                 {
-                    result = userReservations.get(x).checkOut();
+                    result = true;
                     //for(int y=0; y<rooms.size();y++)
                       //  result += "  :  " +rooms.get(y).removeReservationWithUser(guid,reservationId);
                     break;

@@ -159,7 +159,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setText("User ID");
 
-        jLabel3.setText("Reservation ID");
+        jLabel3.setText("Reservation number");
 
         btnPay.setText("Pay");
         btnPay.addActionListener(new java.awt.event.ActionListener() {
@@ -245,17 +245,17 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(CheckInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CheckOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
+                        .addComponent(CheckInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CheckOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(UserID))
+                        .addComponent(UserID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +265,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(ResID, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ResID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -403,12 +403,24 @@ public class MainWindow extends javax.swing.JFrame {
      * @param evt 
      */
     private void CheckInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckInButtonActionPerformed
-        // TODO add your handling code here:
-        //user.checkIn(new UserInformation("test", "test", "test", "test", "Customer"));
-        hotel.checkInReservation(UserID.getText(), ResID.getText());
-        reservationList = hotel.getReservations();
-        this.update();
-        JOptionPane.showMessageDialog(null, "Guest has been checked in!");
+        if(!(UserID.getText().equals("")|| ResID.getText().equals("")))
+        {
+            if(hotel.checkInReservation(UserID.getText(), ResID.getText()))
+            {
+                reservationList = hotel.getReservations();
+                this.update();
+                JOptionPane.showMessageDialog(null, "Guest has been checked in!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Invalid User ID or Reservation number.");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a User ID and Reservation number");
+        }
+        
         
     }//GEN-LAST:event_CheckInButtonActionPerformed
 
@@ -417,15 +429,27 @@ public class MainWindow extends javax.swing.JFrame {
      * @param evt 
      */
     private void CheckOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckOutButtonActionPerformed
-        // TODO add your handling code here:
-        //user.checkOut(new UserInformation("test", "test", "test", "test", "Customer"));
-        hotel.checkOutReservation(UserID.getText(), ResID.getText());
-        hotel.adminDeleteReservation(UserID.getText(), ResID.getText());
-        reservationList = hotel.getReservations();
-        UserID.setText("");
-        ResID.setText("");
-        this.update();
-        JOptionPane.showMessageDialog(null, "Guest has been checked out!");
+        if(!(UserID.getText().equals("")|| ResID.getText().equals("")))
+        {
+            if(hotel.checkOutReservation(UserID.getText(), ResID.getText()))
+            {
+                hotel.adminDeleteReservation(UserID.getText(), ResID.getText());
+                reservationList = hotel.getReservations();
+                UserID.setText("");
+                ResID.setText("");
+                this.update();
+                JOptionPane.showMessageDialog(null, "Guest has been checked out!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Invalid User ID or Reservation number.");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a User ID and Reservation number");
+        }
+        
     }//GEN-LAST:event_CheckOutButtonActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -434,10 +458,23 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        hotel.payReservation(UserID.getText(), ResID.getText());
-        reservationList = hotel.getReservations();
-        this.update();
-        JOptionPane.showMessageDialog(null, "Guest has paid for the room!");
+        if(!(UserID.getText().equals("")|| ResID.getText().equals("")))
+        {
+            if(hotel.payReservation(UserID.getText(), ResID.getText()))
+            {
+                reservationList = hotel.getReservations();
+                this.update();
+                JOptionPane.showMessageDialog(null, "Guest has paid for the room!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Invalid User ID or Reservation number.");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please enter a User ID and Reservation number");
+        }
     }//GEN-LAST:event_btnPayActionPerformed
 
     /**
