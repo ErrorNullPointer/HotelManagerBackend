@@ -206,7 +206,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                         .addComponent(twoBedCheckBox)
                         .addGap(35, 35, 35)
                         .addComponent(queenBedCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(154, 154, 154)
                         .addComponent(jLabel1)
@@ -241,7 +241,7 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                     .addComponent(logoutButton)
                     .addComponent(jLabel1)
                     .addComponent(firstNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 629, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(reserveButton)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
@@ -307,21 +307,30 @@ public class CustomerMainWindow extends javax.swing.JFrame {
                 End.setYear(Integer.parseInt(EndYear.getSelectedItem().toString())-1900);
                 End.setMonth(EndMonth.getSelectedIndex());
                 End.setDate(EndDay.getSelectedIndex());
-                
-                if(!hotel.makeReservation(Start,End,temp.getRoomNum(),false,user.GetEmailAddress()))
+                boolean startafterEnd = (Start.after(End));
+                if(!startafterEnd)
                 {
-                    JOptionPane.showMessageDialog(null, "Failed to Reserve Room.");
+                    if(!hotel.makeReservation(Start,End,temp.getRoomNum(),false,user.GetEmailAddress()))
+                    {
+                        JOptionPane.showMessageDialog(null, "Failed to Reserve Room.");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Room Reserved!");
+                    }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Room Reserved!");
+                    JOptionPane.showMessageDialog(null, "Start date is later than End date!");
                 }
             }
             if(index == -1)
-        {JOptionPane.showMessageDialog(null, "Please Select a room first.");}
+            {
+                JOptionPane.showMessageDialog(null, "Please Select a room first.");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please Select a valid date.");
-            Logger.getLogger(CustomerMainWindow.class.getName()).log(Level.SEVERE, null, e);
+            //Logger.getLogger(CustomerMainWindow.class.getName()).log(Level.SEVERE, null, e);
         }
         
     }//GEN-LAST:event_reserveButtonActionPerformed
